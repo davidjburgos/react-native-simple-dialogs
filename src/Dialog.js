@@ -108,69 +108,129 @@ class Dialog extends Component {
         const {
             dialogStyle, visible, animationType, onRequestClose, onShow,
             onOrientationChange, onTouchOutside, overlayStyle, supportedOrientations,
-            keyboardDismissMode, keyboardShouldPersistTaps, contentInsetAdjustmentBehavior,
+            keyboardDismissMode, keyboardShouldPersistTaps, contentInsetAdjustmentBehavior, scrollView
         } = this.props;
 
         const dialogBackgroundColor = OS === 'ios' ? "#e8e8e8" : "#ffffff";
         const dialogBorderRadius = OS === 'ios' ? 5 : 1;
 
-        return (
-            <Modal
-                animationType={animationType}
-                transparent={true}
-                visible={visible}
-                onRequestClose={onRequestClose}
-                onShow={onShow}
-                onOrientationChange={onOrientationChange}
-                supportedOrientations={supportedOrientations}
-            >
-                <ScrollView
-                    bounces={false}
-                    style={{
-                        flex: 1,
-                    }}
-                    contentContainerStyle={{
-                        flex: 1,
-                    }}
-                    keyboardDismissMode={keyboardDismissMode}
-                    keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-                    contentInsetAdjustmentBehavior={contentInsetAdjustmentBehavior}
+        if (scrollView) {
+            return (
+                <Modal
+                    animationType={animationType}
+                    transparent={true}
+                    visible={visible}
+                    onRequestClose={onRequestClose}
+                    onShow={onShow}
+                    onOrientationChange={onOrientationChange}
+                    supportedOrientations={supportedOrientations}
                 >
-                    <View style={[{
-                        flex: 1,
-                        backgroundColor: "#000000AA",
-                        padding: 24
-                    }, overlayStyle]}>
-                        <SafeAreaView style={{ flex: 1 }}>
-                            {this._renderOutsideTouchable(onTouchOutside)}
-
-                            <View style={[{
-                                backgroundColor: dialogBackgroundColor,
-                                width: '100%',
-                                maxHeight: '100%',
-                                shadowOpacity: 0.24,
-                                borderRadius: dialogBorderRadius,
-                                elevation: 4,
-                                shadowOffset: {
-                                    height: 4,
-                                    width: 2
-                                }
-                            }, dialogStyle]}>
-
-                                {this.renderTitle()}
-
-                                {this.renderContent()}
-
-                                {this.renderButtons()}
-
-                            </View>
-
-                            {this._renderOutsideTouchable(onTouchOutside)}
-                        </SafeAreaView>
+                    <ScrollView
+                        bounces={false}
+                        style={{
+                            flex: 1,
+                        }}
+                        contentContainerStyle={{
+                            flex: 1,
+                        }}
+                        keyboardDismissMode={keyboardDismissMode}
+                        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                        contentInsetAdjustmentBehavior={contentInsetAdjustmentBehavior}
+                    >
+                        <View style={[{
+                            flex: 1,
+                            backgroundColor: "#000000AA",
+                            padding: 24
+                        }, overlayStyle]}>
+                            <SafeAreaView style={{ flex: 1 }}>
+                                {this._renderOutsideTouchable(onTouchOutside)}
+    
+                                <View style={[{
+                                    backgroundColor: dialogBackgroundColor,
+                                    width: '100%',
+                                    maxHeight: '100%',
+                                    shadowOpacity: 0.24,
+                                    borderRadius: dialogBorderRadius,
+                                    elevation: 4,
+                                    shadowOffset: {
+                                        height: 4,
+                                        width: 2
+                                    }
+                                }, dialogStyle]}>
+    
+                                    {this.renderTitle()}
+    
+                                    {this.renderContent()}
+    
+                                    {this.renderButtons()}
+    
+                                </View>
+    
+                                {this._renderOutsideTouchable(onTouchOutside)}
+                            </SafeAreaView>
+                        </View>
+                    </ScrollView>
+                </Modal>
+            )
+        } else {
+            return (
+                <Modal
+                    animationType={animationType}
+                    transparent={true}
+                    visible={visible}
+                    onRequestClose={onRequestClose}
+                    onShow={onShow}
+                    onOrientationChange={onOrientationChange}
+                    supportedOrientations={supportedOrientations}
+                >
+                    <View
+                        bounces={false}
+                        style={{
+                            flex: 1,
+                        }}
+                        contentContainerStyle={{
+                            flex: 1,
+                        }}
+                        keyboardDismissMode={keyboardDismissMode}
+                        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                        contentInsetAdjustmentBehavior={contentInsetAdjustmentBehavior}
+                    >
+                        <View style={[{
+                            flex: 1,
+                            backgroundColor: "#000000AA",
+                            padding: 24
+                        }, overlayStyle]}>
+                            <SafeAreaView style={{ flex: 1 }}>
+                                {this._renderOutsideTouchable(onTouchOutside)}
+    
+                                <View style={[{
+                                    backgroundColor: dialogBackgroundColor,
+                                    width: '100%',
+                                    maxHeight: '100%',
+                                    shadowOpacity: 0.24,
+                                    borderRadius: dialogBorderRadius,
+                                    elevation: 4,
+                                    shadowOffset: {
+                                        height: 4,
+                                        width: 2
+                                    }
+                                }, dialogStyle]}>
+    
+                                    {this.renderTitle()}
+    
+                                    {this.renderContent()}
+    
+                                    {this.renderButtons()}
+    
+                                </View>
+    
+                                {this._renderOutsideTouchable(onTouchOutside)}
+                            </SafeAreaView>
+                        </View>
                     </View>
-                </ScrollView>
-            </Modal>
-        )
+                </Modal>
+            )
+        }
     }
 }
 
